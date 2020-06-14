@@ -1,0 +1,20 @@
+{
+  "name": "download-bbb-records",
+  "authors": [
+    "Alex Aragón <aragcar@gmail.com>"
+  ],
+  "description": "Scripts PHP and Node JS for BBB Records",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.0"
+  }
+}
