@@ -1,8 +1,12 @@
 <?php
 
-$urlMeetingBBB = $_POST['url-meeting'];
-$nameVideo = $_POST['video-name'];
-$timeVideo = $_POST['video-duration'];
+$urlMeetingBBB = isset($_POST['url-meeting']) ? $_POST['url-meeting'] : "0";
+$nameVideo = isset($_POST['video-name']) ? $_POST['video-name'] : "0";
+$minutes = isset($_POST['video-duration-min']) ? $_POST['video-duration-min'] : 0 ;
+$seconds = isset($_POST['video-duration-seg']) ? $_POST['video-duration-seg'] : 0 ;
+
+$timeVideo = ($minutes * 60) + $seconds;
+
 $urlNode = '/usr/bin/node';
 $base = __DIR__.'/bbb-recorder';
 
