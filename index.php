@@ -16,9 +16,11 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <img width="200px" src="images/bigbluebutton-logo.png">
+                <div class="text-center">
+                    <img width="300px" src="images/logo_bbb_convert.svg">
+                </div>
                 <div class="page-header">
-                    <h2>Generar un BBB Record!</h2>
+                    <h2>Generar un BBB mp4!</h2>
                 </div>
                 <form id="generate-record" method="post">
                     <div class="form-group">
