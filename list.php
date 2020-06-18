@@ -47,7 +47,7 @@
                             $url = 'files/'.$file;
                             echo '<tr><td>'.$count.'</td><td><i class="fas fa-video"></i> ';
                             echo '<a href="'.$url.'">'.$file.'</a></td>';
-                            echo '<td><a href="#" class="btn btn-secondary btn-sm"><i class="fas fa-file-download"></i> Descargar</a></td></tr>';
+                            echo '<td><a href="download.php?file='.$file.'" class="btn btn-secondary btn-sm"><i class="fas fa-file-download"></i> Descargar</a></td></tr>';
                         }
                     ?>
                         </tbody>
