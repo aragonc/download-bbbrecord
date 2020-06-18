@@ -35,8 +35,27 @@
                         <input type="text" name="video-duration-seg" class="form-control" id="video-duration-seg" placeholder="">
                     </div>
 
+                    <div id="counter" style="display: none;">
+                        <div class="form-group">
+                            <div class="alert alert-info">
+                                <strong>¡Se esta generando la grabación!</strong>, su grabación estara disponible en
+                                <strong>
+                                    <span id="minute"></span>:<span id="second"></span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="convert" style="display: none;">
+                        <div class="form-group">
+                            <div class="alert alert-warning">
+                                <strong>¡Se esta procesando!</strong>, se esta generando la conversión a MP4 este proceso puede tardar unos minutos...
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit">Generar video de descarga</button>
+                        <a class="btn btn-success btn-block" style="display: none;" id="btn-view" href="#">Visualiza los archivos generados</a>
+                        <button class="btn btn-primary btn-block" id="btn-generate" type="submit">Generar grabación</button>
                     </div>
                 </form>
             </div>
@@ -47,25 +66,64 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#generate-record").submit(function (event) {
-            event.preventDefault();
+        $("#generate-record").submit(function (e) {
+            e.preventDefault();
+
+            $("#counter").show();
+            $("#btn-generate").text('Generando la grabación...');
+            $("#btn-generate").prop('disabled', true);
+
+            var minutesText = $("#video-duration-min").val();
+            var secondsText = $("#video-duration-seg").val();
+            var timer2 = minutesText + ":"+secondsText
+            var totalTime = parseInt(minutesText) * 60 + parseInt(secondsText);
+
+            var interval = setInterval(function () {
+                var timer = timer2.split(':');
+                var minutes = parseInt(timer[0], 10);
+                var seconds = parseInt(timer[1], 10);
+                    --totalTime;
+                    --seconds;
+                    minutes = (seconds < 0) ? --minutes : minutes;
+
+                    if (minutes < 0) clearInterval(interval);
+                    seconds = (seconds < 0) ? 59 : seconds;
+                    seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+                    timer2 = minutes + ':' + seconds;
+
+                    $('#minute').html(minutes);
+                    $('#second').html(seconds);
+                    console.log(totalTime);
+                    if(totalTime === -1){
+                        $('#minute').html('0');
+                        $('#second').html('00');
+                        $("#convert").show();
+                        $("#btn-view").show();
+                    }
+
+            }, 1000);
+
+
+
             $.ajax({
                 url: 'generar.php',
                 type: 'POST',
                 data: $(this).serialize(),
-                success: function (result) {
-                    $("#response").text(result);
-
+                success: function (response) {
+                    //$("#response").text(result);
+                    var jsonData = JSON.parse(response);
+                    console.log(jsonData);
                 }
 
             });
         });
-    }
+    });
 </script>
 </body>
 </html>
