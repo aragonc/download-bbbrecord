@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+body{
+    background-color: #48abdf;
+    font-family: 'Quicksand', sans-serif;
+}
+.page{
+    margin-top: 1rem;
+}
+.page .container{
+    width: 700px;
+}
+.page-header{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.page .card{
+    padding: 2rem;
+}
+.btn-primary{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.btn-success{
+    text-transform: uppercase;
+    font-weight: bold;
+}
