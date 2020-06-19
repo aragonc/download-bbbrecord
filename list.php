@@ -15,8 +15,27 @@
 <?php
 
 include "scandir.php";
+
 $folder = __DIR__.'/files';
 $files = scanDir::scan($folder, 'mp4');
+
+$fileGet = isset($_GET['file'])  ? $_GET['file'] : "";
+$action = isset($_GET['action'])  ? $_GET['action'] : "";
+$delete = false;
+$msg = null;
+
+switch ($action){
+    case 'delete':
+        if($fileGet){
+            if (unlink($_GET['file'])) {
+                $delete = true;
+                $msg = "El archivo fue eliminado correctamente";
+                header("Refresh:0; url=list.php");
+                exit;
+            }
+        }
+        break;
+}
 
 ?>
 <body>
@@ -33,6 +52,11 @@ $files = scanDir::scan($folder, 'mp4');
                 <div class="action">
                     <a class="btn btn-info mb-2" href="index.php"><i class="fas fa-chevron-left"></i> Regresar</a>
                 </div>
+                <?php
+                    if ($delete){
+                        echo '<div class="alert alert-success">'.$msg.'</div>';
+                    }
+                ?>
                 <table>
                     <table class="table table-striped">
                         <thead>
@@ -50,7 +74,8 @@ $files = scanDir::scan($folder, 'mp4');
                             $url = 'files/'.$file;
                             echo '<tr><td>'.$count.'</td><td><i class="fas fa-video"></i> ';
                             echo '<a data-toggle="modal" data-video="'.$url.'" href="#" class="modal-show">'.$file.'</a></td>';
-                            echo '<td><a href="download.php?file='.$file.'" class="btn btn-secondary btn-sm"><i class="fas fa-file-download"></i> Descargar</a></td></tr>';
+                            echo '<td><a href="download.php?file='.$file.'" class="btn btn-secondary btn-sm"><i class="fas fa-file-download"></i> Descargar</a>';
+                            echo ' <a onclick="javascript: if (!confirm(\'Por favor, confirme su elección\')) return false;" class="btn btn-danger btn-sm" href="?action=delete&file='.$url.'"><i class="fas fa-trash-alt"></i> Eliminar</a></td></tr>';
                         }
                         ?>
                         </tbody>
