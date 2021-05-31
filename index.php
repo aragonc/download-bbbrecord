@@ -44,7 +44,7 @@
                                           <?php  } ?>
                                 
                                     </select>
-                                    <a href="indexCat.php"><div type="button" class="btn btn-primary">Agregar Cat</div></a>
+                                    <a href="index-category.php"><div type="button" class="btn btn-primary">Agregar Cat</div></a>
                                   </div>
                                    
 
