@@ -70,7 +70,7 @@
                                     <tr>
                                         <th>Url</th>
                                         <th>Categoria</th>
-                                        <th>NOmbre</th>
+                                        <th>Nombre</th>
                                         <th>Duracion</th>
                                         <th>Acciciones</th>
                                        
@@ -87,8 +87,8 @@
                                             <td><?=$row['nombre']?></td>
                                             <td><?=$row['duracion']?></td>
                                             <td>
-                                                <a href="edit.php?id=<?php echo $row['id']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
-                                                <a href="delete.php?id=<?php echo $row['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="edit-video.php?id=<?php echo $row['id']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
+                                                <a href="delete-video.php?id=<?php echo $row['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>         
                                    <?php } ?>
