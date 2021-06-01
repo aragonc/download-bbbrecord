@@ -1,11 +1,16 @@
+/* /var/www/tunqui/bbb/bbb-recorder
+ * /usr/local/lib/node_modules
+ *
+ * */
+
 const os = require('os');
-const homedir =  os.homedir()+ "/html";
+const homedir =  os.homedir()+ "/tunqui";
 const tmpfolder =  '/tmp';
-const puppeteer = require(homedir + '/download-bbb-records/bbb-recorder/node_modules/puppeteer');
-const Xvfb      = require('/usr/lib/node_modules/xvfb');
+const puppeteer = require(homedir + '/bbb/bbb-recorder/node_modules/puppeteer');
+const Xvfb      = require('/usr/local/lib/node_modules/xvfb');
 const fs = require('fs');
 const platform = os.platform();
-const config = JSON.parse(fs.readFileSync(homedir + "/download-bbb-records/bbb-recorder/config.json", 'utf8'));
+const config = JSON.parse(fs.readFileSync(homedir + "/bbb/bbb-recorder/config.json", 'utf8'));
 const spawn = require('child_process').spawn;
 
 var xvfb        = new Xvfb({

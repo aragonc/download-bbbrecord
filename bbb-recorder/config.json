@@ -3,6 +3,6 @@
 	"ffmpegServer": "ws://localhost",
 	"ffmpegServerPort": 4000,
 	"auth": "mZFZN4yc",
-	"copyToPath": "/var/www/html/download-bbb-records/files",
+	"copyToPath": "/var/www/tunqui/bbb/files",
 	"playbackFile": "playback\\.html"
 }
