@@ -1,3 +1,5 @@
+
+<?php include("db.php") ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -12,131 +14,102 @@
     <title>Generar un BBB Record!</title>
 </head>
 <body>
-<div id="page" class="page">
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <div class="text-center">
-                    <img width="300px" src="images/logo_bbb_convert.svg">
+<div id="page">
+    <div class="container p-4">
+        <div class="row">         
+                    <div class="col-md-6">
+                        <?php if (isset($_SESSION['message'])) { ?>
+                <div class="alert alert-<?= $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
+                   <?= $_SESSION['message'] ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="page-header">
-                    <h2>Generar un BBB mp4!</h2>
-                </div>
-                <form id="generate-record" method="post">
-                    <div class="form-group">
-                        <label for="url-meeting">URL del Meeting BBB</label>
-                        <input type="text" name="url-meeting" class="form-control" id="url-meeting" required
-                               placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="video-name">Nombre para el archivo</label>
-                        <input type="text" name="video-name" class="form-control" id="video-name" required
-                               placeholder="">
+                        <?php session_unset(); }  ?>
+                            <div class="card-body">
+                                <h1>Generar un BBB Record!</h1>
+                                <form method="post" action="generar.php">
+                                    <div class="form-group">
+                                        <label for="url-meeting">URL del Meeting BBB</label>
+                                        <input type="text" name="url-meeting" class="form-control" id="url-meeting" placeholder="">
+                                    </div>
+
+                                  
+                                  <div class="form-group">
+                                  <label for="video-categoria">Categoria</label>
+                                    <select  class="btn btn-secondary" name="video-categoria" >
+                                        
+                                        <?php $query2 =  "SELECT * FROM categoria";
+                                         $resultCat = mysqli_query($conn,$query2);
+                                         while ($cat = mysqli_fetch_array($resultCat)) { ?>
+                                         <option value="<?= $cat['idCat'] ?>"> <?=$cat['nombreCat'] ?></option>
+                                          <?php  } ?>
+                                
+                                    </select>
+                                    <a href="index-category.php"><div type="button" class="btn btn-primary">Agregar Cat</div></a>
+                                  </div>
+                                   
+
+                                    <div class="form-group">
+                                        <label for="video-name">Nombre del archivo de video de salida</label>
+                                        <input type="text" name="video-name" class="form-control" id="video-name" placeholder="">
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="video-duration">Duración en segundos del video</label>
+                                        <input type="text" name="video-duration" class="form-control" id="video-duration" placeholder="">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <button class="btn btn-primary btn-block" type="submit" name="generar">Generar video de descarga</button>
+                                     </div>
+                                    </form>
+                             </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="video-duration-min">Duración Total / Minutos</label>
-                        <input type="text" name="video-duration-min" class="form-control" id="video-duration-min"
-                               required placeholder="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="video-duration-seg">Duración Total / Segundos </label>
-                        <input type="text" name="video-duration-seg" class="form-control" id="video-duration-seg"
-                               required placeholder="">
-                    </div>
-
-                    <div id="counter" style="display: none;">
-                        <div class="form-group">
-                            <div class="alert alert-info">
-                                <strong>¡Generando la grabación!</strong> en
-                                <strong>
-                                    <span id="minute"></span>:<span id="second"></span>
-                                </strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="convert" style="display: none;">
-                        <div class="form-group">
-                            <div class="alert alert-warning">
-                                <strong>¡Se esta procesando!</strong>, se esta generando la conversión a MP4 este
-                                proceso puede tardar unos minutos...
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block" id="btn-generate" type="submit">
-                            <i class="fas fa-download"></i> Generar grabación
-                        </button>
-                        <a class="btn btn-info btn-block" id="btn-view" href="list.php"><i class="fas fa-file-video"></i>
-                            Ver archivos generados</a>
+                    <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Url</th>
+                                        <th>Categoria</th>
+                                        <th>Nombre</th>
+                                        <th>Duracion</th>
+                                        <th>Acciciones</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    $query = "SELECT v.id, v.url,c.idCat ,c.nombreCat ,v.nombre , v.duracion FROM videos v INNER JOIN categoria c ON c.idCat = v.idCat";
+                                    $result_videos = mysqli_query($conn,$query);
+                                    while ($row = mysqli_fetch_array($result_videos)){ ?>
+                                            <tr>
+                                            <td><a href="<?=$row['url']?>"><?=$row['url']?></a></td>
+                                            <td><?=$row['nombreCat']?></td>
+                                            <td><?=$row['nombre']?></td>
+                                            <td><?=$row['duracion']?></td>
+                                            <td>
+                                                <a href="edit-video.php?id=<?php echo $row['id']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
+                                                <a href="delete-video.php?id=<?php echo $row['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>         
+                                   <?php } ?>
+                                </tbody>
+                            </table>
                     </div>
                 </form>
             </div>
         </div>
+
+
     </div>
 </div>
 
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#generate-record").submit(function (e) {
-            e.preventDefault();
-
-            $("#counter").show();
-            $("#btn-generate").text('Generando la grabación...');
-            $("#btn-generate").prop('disabled', true);
-
-            var minutesText = $("#video-duration-min").val();
-            var secondsText = $("#video-duration-seg").val();
-            var timer2 = minutesText + ":" + secondsText
-            var totalTime = parseInt(minutesText) * 60 + parseInt(secondsText);
-
-            var interval = setInterval(function () {
-                var timer = timer2.split(':');
-                var minutes = parseInt(timer[0], 10);
-                var seconds = parseInt(timer[1], 10);
-                --totalTime;
-                --seconds;
-                minutes = (seconds < 0) ? --minutes : minutes;
-
-                if (minutes < 0) clearInterval(interval);
-                seconds = (seconds < 0) ? 59 : seconds;
-                seconds = (seconds < 10) ? '0' + seconds : seconds;
-
-                timer2 = minutes + ':' + seconds;
-
-                $('#minute').html(minutes);
-                $('#second').html(seconds);
-                console.log(totalTime);
-                if (totalTime === -1) {
-                    $('#minute').html('0');
-                    $('#second').html('00');
-                    $("#convert").show();
-                }
-            }, 1000);
-
-            $.ajax({
-                url: 'generar.php',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (response) {
-                    //$("#response").text(result);
-                    var jsonData = JSON.parse(response);
-                    console.log(jsonData);
-                }
-
-            });
-        });
-    });
-</script>
 </body>
 </html>

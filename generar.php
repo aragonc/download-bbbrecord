@@ -18,8 +18,11 @@ $textOut =  null;
 $_SESSION['name'] = $nameVideo;
 
 $options = $urlNode.' '.$base.'/export.js "'.$urlMeetingBBB.'" 2>&1 '.$nameVideo.'.webm '.$timeVideo.' false';
+
+$return = 1;
+
 $result = exec($options, $output, $return);
-$return = $output = 1;
+
 if($return){
     $mgs = "Existio un problema en la ejecución";
 } else {
