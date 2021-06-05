@@ -1,26 +1,10 @@
+
+<?php include("db.php") ?>
 <?php
-include("db.php");
-
+ $title = "Categoria";
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<table class="table table-hover">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
-    <title>Categorias</title>
-</head>
-<body>
-    
-<div  class="container p-4">
-
-    <div class="row">
-
+<?php include("header.php") ?>
+        <div class="col-md-3"></div >
             <div class="col-md-6">
             <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
@@ -31,43 +15,46 @@ include("db.php");
                 </div>
                         <?php session_unset(); }  ?>
                 <div class="card-body">
-                <h1>Generar Nueva Categoria</h1>
-                  <form method="post" action="add-category.php">
+                <h1 style="font-size:24px;text-align: center; font-weight:bold;margin-bottom: 15px; margin-top: 15px;">Agregar Categoria</h1>
+                <div style="margin-bottom: 15px;">
+                    <a href="index.php"><div type="button" class="btn btn-lila"> << Regresar a Videos</div></a>
+                </div>
+                  </form> 
+                <form method="post" action="add-category.php">
                         <div class="form-group">
-                            <label for="nueva-categoria">Nueva Categoria</label>
-                            <input type="text" name="nueva-categoria" class="form-control" id="nueva-categoria" placeholder="">
+                            <label for="new-category">Nombre de la Categoria</label>
+                            <input type="text" name="new-category" class="form-control" id="new-category" placeholder="">
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit" name="generarCat">Agregar</button>
+                            <button class="btn btn-primary btn-block" type="submit" name="generate-category">Agregar</button>
                     </div>
-                    <div>
-                    <a href="index.php"><div type="button" class="btn btn-info">Regresar a Videos</div></a></div>
-                  </form>
-
                 </div>
-
             </div>
+           
+            <div class="col-md-12"></div>
+            <div class="col-md-3"></div >
             <div class="col-md-6">
-                <table class="table table-hover">
+                <div>Lista de categorias</div>
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Nombre Cat</th>   
-                            <th>Acciciones</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">NOMBRE</th>   
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
-                        $query = "SELECT * FROM categoria";
+                        $query = "SELECT * FROM category";
                          $result_cat = mysqli_query($conn,$query);
                                     while ($row = mysqli_fetch_array($result_cat)){ ?>
                         <tr>
-                            <td><?=$row['idCat']?></td>
-                            <td><?=$row['nombreCat']?></td>
+                            <td><?=$row['idCategory']?></td>
+                            <td><?=$row['nameCategory']?></td>
                             <td>
-                               <a href="edit-category.php?idCat=<?php echo $row['idCat']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
-                               <a href="delete-category.php?idCat=<?php echo $row['idCat']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                               <a href="edit-category.php?idCategory=<?php echo $row['idCategory']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
+                               <a href="delete-category.php?idCategory=<?php echo $row['idCategory']?>" onclick="return confirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>  
                         
@@ -80,12 +67,6 @@ include("db.php");
     </div>
 
 </div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-</body>
-</html>
+</div>
+</div>
+<?php include("footer.php") ?>

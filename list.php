@@ -50,7 +50,7 @@ switch ($action){
                     <h2>Lista de videos generados</h2>
                 </div>
                 <div class="action">
-                    <a class="btn btn-info mb-2" href="index.php"><i class="fas fa-chevron-left"></i> Regresar</a>
+                    <a class="btn btn-lila mb-2" href="index.php"><i class="fas fa-chevron-left"></i> Regresar</a>
                 </div>
                 <?php
                     if ($delete){

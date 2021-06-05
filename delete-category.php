@@ -3,9 +3,9 @@
 
 include("db.php");
 
-if(isset($_GET['idCat'])) {
-  $idCat = $_GET['idCat'];
-  $query = "DELETE FROM categoria WHERE idCat = $idCat";
+if(isset($_GET['idCategory'])) {
+  $idCategory = $_GET['idCategory'];
+  $query = "DELETE FROM category WHERE idCategory = $idCategory";
   $result = mysqli_query($conn, $query);
   if(!$result) {
     die("Query Failed.");

@@ -2,12 +2,12 @@
 
 include "db.php";
 
-if(isset($_POST['generarCat'])){
+if(isset($_POST['generate-category'])){
     
    
-    $nombrecat = $_POST['nueva-categoria'];
+    $nameCategory = $_POST['new-category'];
 
-    $query = "INSERT INTO categoria(nombreCat) VALUES ('$nombrecat')";
+    $query = "INSERT INTO category(nameCategory) VALUES ('$nameCategory')";
     $result = mysqli_query($conn,$query);
     if(!$result){
         die("query failed");

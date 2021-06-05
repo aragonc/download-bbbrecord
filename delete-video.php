@@ -3,9 +3,9 @@
 
 include("db.php");
 
-if(isset($_GET['id'])) {
-  $id = $_GET['id'];
-  $query = "DELETE FROM videos WHERE id = $id";
+if(isset($_GET['idVideo'])) {
+  $idVideo = $_GET['idVideo'];
+  $query = "DELETE FROM videos WHERE idVideo = $idVideo";
   $result = mysqli_query($conn, $query);
   if(!$result) {
     die("Query Failed.");

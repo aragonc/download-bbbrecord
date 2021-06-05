@@ -2,26 +2,26 @@
 <?php
 include("db.php");
 $url = '';
-$nombreCat = '';
+$nameCategory = '';
 
 
-if  (isset($_GET['idCat'])) {
-  $idCat = $_GET['idCat'];
-  $query = "SELECT * FROM categoria WHERE idCat=$idCat";
+if  (isset($_GET['idCategory'])) {
+  $idCategory = $_GET['idCategory'];
+  $query = "SELECT * FROM category WHERE idCategory=$idCategory";
   $result = mysqli_query($conn, $query);
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
-    $nombreCat = $row['nombreCat'];
+    $nameCategory = $row['nameCategory'];
     
   }
 }
 
-if (isset($_POST['updateCat'])) {
-  $idCat = $_GET['idCat'];
-  $nombreCat= $_POST['nombre-categoria'];
+if (isset($_POST['updateCategory'])) {
+  $idCategory = $_GET['idCategory'];
+  $nameCategory= $_POST['name-category'];
  
 
-  $query = "UPDATE categoria set nombreCat = '$nombreCat' WHERE idCat=$idCat";
+  $query = "UPDATE category set nameCategory = '$nameCategory' WHERE idCategory=$idCategory";
   mysqli_query($conn, $query);
   $_SESSION['message'] = 'Archivo Modificado con Exito';
   $_SESSION['message_type'] = 'warning';
@@ -29,23 +29,39 @@ if (isset($_POST['updateCat'])) {
 }
 
 ?>
- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<div class="container p-4">
-  <div class="row">
-    <div class="col-md-4 mx-auto">
-      <div class="card card-body">
-      <form action="edit-category.php?idCat=<?php echo $_GET['idCat']; ?>" method="POST">
+<?php $title = "Actualizar Categoria"; ?>
+<?php include("header.php") ?>
+
+             <div class="col-md-12">
+                        <div class="cola">Editar Categoria</div>
+            </div>
+             <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+            <div>
+             <a href="index.php"><div type="button" class="btn btn-lila" style="margin-bottom: 15px;margin-top: 0px;"> << Regresar a Videos</div></a>
+            </div>   
+            </div > 
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div >
+       
+        <div class="col-md-6">
+        <form action="edit-category.php?idCategory=<?php echo $_GET['idCategory']; ?>" method="POST">
         <div class="form-group">
-          <input name="nombre-categoria" type="text" class="form-control" value="<?php echo $nombreCat; ?>">
+          <input name="name-category" type="text" class="form-control" value="<?php echo $nameCategory; ?>">
         </div>
 
-        <button class="btn-success" name="updateCat">
+        <button class="btn btn-green" name="updateCategory">
           Update
         </button>
       </form>
-      </div>
+        </div>
+                   
+            </div>
+        </div>
+
+
     </div>
-  </div>
-</div>
+
+
 
