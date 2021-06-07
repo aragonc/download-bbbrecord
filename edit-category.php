@@ -55,13 +55,10 @@ if (isset($_POST['updateCategory'])) {
           Update
         </button>
       </form>
-        </div>
-                   
+        </div>               
             </div>
         </div>
-
-
     </div>
-
+    <?php include("footer.php") ?>
 
 

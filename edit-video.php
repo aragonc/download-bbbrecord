@@ -52,7 +52,7 @@ if (isset($_POST['action'])) {
             </div>
             <div class="col-md-3"></div>
             <div class="col-md-6"><div>
-             <a href="index.php"><div type="button" class="btn btn-lila" style="margin-bottom: 15px;margin-top: 7px;"> << Regresar a Videos</div></a>
+             <a class="btn btn-lila" style="margin-bottom: 15px;margin-top: 7px;" href="index.php"> << Regresar a Videos</a>
             </div>   
             </div > 
         <div class="col-md-3"></div>

@@ -18,9 +18,9 @@
                                  <div class="col-md-12">
                                     <div class="card-bottom">
                                        <div></div>
-                                        <a href="index-category.php"><div class="btn btn-primary btn-purple " type="submit" name="agregar-categoria">Agregar Categoria</div></a>
-                                        <a href="add-video.php"><div class="btn btn-primary btn-green" type="submit" name="agregar-reunion">Agregar Reunión BBB</div></a>
-                                        <a href="generate-video.php"><div class="btn btn-primary btn-blue" type="submit" name="videos-generados">Videos Generados</div></a>
+                                        <a href="index-category.php" class="btn btn-primary btn-purple " type="submit" name="agregar-categoria">Agregar Categoria</a>
+                                        <a href="add-video.php" class="btn btn-primary btn-green" type="submit" name="agregar-reunion">Agregar Reunión BBB</a>
+                                        <a href="generate-video.php" class="btn btn-primary btn-blue" type="submit" name="videos-generados">Videos Generados</a>
                                     </div>
                                  </div>
 

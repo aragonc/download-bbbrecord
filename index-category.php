@@ -17,7 +17,7 @@
                 <div class="card-body">
                 <h1 style="font-size:24px;text-align: center; font-weight:bold;margin-bottom: 15px; margin-top: 15px;">Agregar Categoria</h1>
                 <div style="margin-bottom: 15px;">
-                    <a href="index.php"><div type="button" class="btn btn-lila"> << Regresar a Videos</div></a>
+                    <a class="btn btn-lila" href="index.php"> << Regresar a Videos</a>
                 </div>
                   </form> 
                 <form method="post" action="add-category.php">

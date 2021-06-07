@@ -1,15 +1,13 @@
 <?php $title = "Generar un BBB Record!"; ?>
 <?php include("db.php") ?>
 <?php include("header.php") ?>
-        <div class="col-md-3">
-
-        </div >
+        <div class="col-md-3"></div >
                     <div class="col-md-6">
                      
                             <div class="card-body">
                                 <h1 style="text-align: center;">Generar un BBB Record!</h1>
                                 <div>
-                    <a href="index.php"><div type="button" class="btn btn-lila" style="margin-bottom: 15px;margin-top: 7px;"> << Regresar a Videos</div></a>
+                    <a class="btn btn-lila" style="margin-bottom: 15px;margin-top: 7px;" href="index.php"> << Regresar a Videos</a>
                     </div>
                   </form>         
                                 <form method="post" action="saveVideos.php">
@@ -56,24 +54,14 @@
                                       </div>
                                     </div>
 
-                                    
-                                  
-
                                     <div class="form-group">
                                     <button class="btn btn-green btn-block" type="submit" name="generate-video">Guardar Reunión BBB</button>
                                      </div>
                                     </form>
                              </div>
                     </div>
-
-                   
                 </form>
             </div>
         </div>
-
-
     </div>
-
-
-
     <?php include("footer.php") ?>
