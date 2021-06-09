@@ -1,3 +1,13 @@
+<?php 
+session_start();
+$varsession = $_SESSION['usuario'];
+
+if($varsession == null || $varsession == ''){
+
+    header('location:login.php');
+
+}
+?>
 <?php $title = "Generar un BBB Record!"; ?>
 <?php include("db.php") ?>
 <?php include("header.php") ?>

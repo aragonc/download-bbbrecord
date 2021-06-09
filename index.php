@@ -1,4 +1,13 @@
+<?php 
+session_start();
+$varsession = $_SESSION['usuario'];
 
+if($varsession == null || $varsession == ''){
+
+    header('location:login.php');
+
+}
+?>
 <?php include("db.php") ?>
 <?php $title = "Inicio"; ?>
 <div class="col-md-12" style="padding-top: 15px;">
