@@ -1,5 +1,5 @@
-
-<?php include("db.php") ?>
+<?php session_start(); 
+ include("db.php") ?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -18,7 +18,6 @@
 <body>
 <div id="page">
 <div class="container p-4">
-
     <div class="row">
     <div class="col-md-12">  
     <a href="signoff.php"></a>                             
@@ -32,19 +31,34 @@
                         <div class="col-md-12 login">
                             <div class="">INICIAR SESION</div>
                         </div>
+                        <?php if(isset($_SESSION['error-login'])): ?>
+                            <div  class="col-md-4 "></div>
+                            <div  class="col-md-4 ">
+                             <div style="text-align: center; font-weight: bold;" class="alert alert-danger alert-dismissible fade show" role="alert"> 
+                               <?= $_SESSION['error-login'];?>
+                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                            </button>
+                             </div>
+                                <?php session_unset();   ?>
+                                
+                            </div>
+                            <div  class="col-md-4 "></div>
+                        <?php endif; ?>
+                        
                         <div  class="col-md-4 "></div>
                         <div class="col-md-8">
                         <form method="post" action="validatelogin.php">
                              <div class="form-group text">
                                  <label for="usuario">usuario</label>
-                                 <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Usuario">
+                                 <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Usuario" required>
                              </div>
                         </div>
                         <div  class="col-md-4 "></div>
                         <div class="col-md-8">
                                 <div class="form-group text">
                                      <label for="password">password</label>
-                                     <input type="text" name="password" class="form-control" id="password" placeholder="Password">
+                                     <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                                </div>
                         </div>
                         <div  class="col-md-4 "></div>

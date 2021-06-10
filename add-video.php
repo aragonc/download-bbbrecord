@@ -1,16 +1,11 @@
 <?php 
 session_start();
-$varsession = $_SESSION['usuario'];
-
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
-}
-?>
-<?php $title = "Generar un BBB Record!"; ?>
-<?php include("db.php") ?>
-<?php include("header.php") ?>
+if(!isset($_SESSION['usuario'])){
+    header('Location:login.php');
+  }
+$title = "Generar un BBB Record!"; 
+include("db.php");
+include("header.php") ?>
         <div class="col-md-3"></div >
                     <div class="col-md-6">
                      

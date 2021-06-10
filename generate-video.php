@@ -1,25 +1,20 @@
 
 <?php 
 session_start();
-$varsession = $_SESSION['usuario'];
-
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
-}
-?>
-<?php include("db.php") ?>
-<?php $title = "Generar Video"; ?>
-<?php include("header.php") ?>
-                
-            <div class="col-md-12 login">
+if(!isset($_SESSION['usuario'])){
+    header('Location:login.php');
+  }
+include("db.php"); 
+$title = "Generar Video"; 
+include("header.php") 
+?>         
+           <div class="col-md-12 login">
                     <div class="" style="margin-bottom: 15px;">Lista de Videos Generados</div>
             </div>
             <div class="col-md-3"></div >
             <div class="col-md-9">
             <div style="margin-bottom: 15px;">
-                <a class="btn btn-lila" href="index.php"> << Regresar a Videos</a>
+                <a class="btn btn-lila" href="s"> << Regresar a Videos</a>
             </div>
             </div>
             <div class="col-md-3"></div >

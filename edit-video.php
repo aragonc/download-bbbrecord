@@ -1,16 +1,7 @@
-
-<?php 
-session_start();
-$varsession = $_SESSION['usuario'];
-
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
+<?php session_start();
+ if(!isset($_SESSION['usuario'])){
+  header('Location:login.php');
 }
-?>
-
-<?php
 include("db.php");
 $url = '';
 $nameVideo= '';
@@ -46,14 +37,13 @@ if (isset($_POST['action'])) {
  
 
   $query = "UPDATE videos set url = '$url', idCategory='$idCategory', nameVideo = '$nameVideo' , minutesVideo = '$videomin', secondsVideo = '$videoseg' ,date = '$date' WHERE idVideo=$idVideo";
-  var_dump($query);
+
  
   mysqli_query($conn, $query);
   $_SESSION['message'] = 'Archivo Modificado con Exito';
   $_SESSION['message_type'] = 'warning';
   header('Location: index.php');
 }
-
 ?>
 <?php $title = "Editar Video"; ?>
 <?php include("header.php") ?>

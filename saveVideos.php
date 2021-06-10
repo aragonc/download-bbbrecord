@@ -1,9 +1,6 @@
-<?php 
-
+<?php session_start();
 include "db.php";
-
-if(isset($_POST['generate-video'])){
-    
+if(isset($_POST['generate-video'])){  
     $url = $_POST['url-meeting'];
     $category = $_POST['video-categoria'];
     $nameVideo = $_POST['video-name'];
@@ -16,11 +13,7 @@ if(isset($_POST['generate-video'])){
     if(!$result){
         die("query failed");
     }
-
     $_SESSION['message'] = "Archivo guardado satisfactoriamente";
     $_SESSION['message_type'] = "success";
-
     header("Location: index.php");
-
-
 }

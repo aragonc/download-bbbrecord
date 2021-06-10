@@ -1,19 +1,12 @@
 
-<?php 
-session_start();
-$varsession = $_SESSION['usuario'];
+<?php session_start();
 
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
+ if(!isset($_SESSION['usuario'])){
+  header('Location:login.php');
 }
-?>
-<?php
 include("db.php");
 $url = '';
 $nameCategory = '';
-
 
 if  (isset($_GET['idCategory'])) {
   $idCategory = $_GET['idCategory'];
@@ -39,6 +32,7 @@ if (isset($_POST['updateCategory'])) {
 }
 
 ?>
+
 <?php $title = "Actualizar Categoria"; ?>
 <?php include("header.php") ?>
 
@@ -49,7 +43,7 @@ if (isset($_POST['updateCategory'])) {
             </div>
             <div class="col-md-6">
             <div>
-             <a href="index.php"><div type="button" class="btn btn-lila" style="margin-bottom: 15px;margin-top: 0px;"> << Regresar a Videos</div></a>
+             <a href="index-category.php"><div type="button" class="btn btn-lila" style="margin-bottom: 15px;margin-top: 0px;"> << Regresar a Categoria</div></a>
             </div>   
             </div > 
         <div class="col-md-3"></div>

@@ -1,28 +1,14 @@
 <?php 
 session_start();
-$varsession = $_SESSION['usuario'];
-
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
+if(!isset($_SESSION['usuario'])){
+    header('Location:login.php');
 }
-?>
-<?php include("db.php") ?>
-<?php
- $title = "Categoria";
-?>
-<?php include("header.php") ?>
+include("db.php");
+$title = "Categoria";
+include("header.php") ?>
         <div class="col-md-3"></div >
             <div class="col-md-6">
-            <?php if (isset($_SESSION['message'])) { ?>
-                <div class="alert alert-<?= $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
-                   <?= $_SESSION['message'] ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                        <?php session_unset(); }  ?>
+            <?php getMessage();  ?>
                 <div class="card-body">
                 <h1 style="font-size:24px;text-align: center; font-weight:bold;margin-bottom: 15px; margin-top: 15px;">Agregar Categoria</h1>
                 <div style="margin-bottom: 15px;">
@@ -31,8 +17,8 @@ if($varsession == null || $varsession == ''){
                   </form> 
                 <form method="post" action="add-category.php">
                         <div class="form-group">
-                            <label for="new-category">Nombre de la Categoria</label>
-                            <input type="text" name="new-category" class="form-control" id="new-category" placeholder="">
+                            <label  for="new-category">Nombre de la Categoria</label>
+                            <input  type="text" name="new-category" class="form-control" id="new-category" placeholder="">
                         </div>
 
                         <div class="form-group">
@@ -69,12 +55,8 @@ if($varsession == null || $varsession == ''){
                         
                         <?php } ?>                  
                     </tbody>
-            </table>
-
-
-                
+            </table>           
     </div>
-
 </div>
 </div>
 </div>

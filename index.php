@@ -1,27 +1,21 @@
 <?php 
 session_start();
-$varsession = $_SESSION['usuario'];
-
-if($varsession == null || $varsession == ''){
-
-    header('location:login.php');
-
-}
-?>
-<?php include("db.php") ?>
-<?php $title = "Inicio"; ?>
+ if(!isset($_SESSION['usuario'])){
+   header('Location:login.php');
+ }
+include("db.php");
+$title = "Inicio";                  
+include("header.php") ?>        
 <div class="col-md-12" style="padding-top: 15px;">
-        <?php if (isset($_SESSION['message'])) { ?>
-                <div class="alert alert-<?= $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
-                   <?= $_SESSION['message'] ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                        <?php session_unset(); }  ?>
-        </div> 
-<?php include("header.php") ?>        
+        <?php getMessage();  ?>
+</div> 
                         <div class="col-md-12">
+                        <?php if(isset($_SESSION['usuario'])): ?>
+                            <div class="col-md-12 login">
+                                <div>USUARIO :<?= $_SESSION['usuario'];?></div>  
+                            </div>
+                        <?php endif; ?>
+                        
                         <div class="cola">Cola De Grabaciones</div>
                         </div>
                                  <div class="col-md-12">
