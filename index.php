@@ -27,7 +27,7 @@ include("header.php") ?>
                                     </div>
                                  </div>
 
-                       <div class="col-md-14">
+                       <div class="col-md-12">
                        <div class="list ">LISTA DE REUNIONES</div>
                             <table class="table table-bordered">
                                 <thead>
