@@ -30,9 +30,7 @@ include("header.php") ?>
                        <div class="col-md-12">
                        <div class="list ">LISTA DE REUNIONES</div>
                             <table class="table table-bordered">
-                                <thead>
-                                    
-                                    
+                                <thead>        
                                     <br>
                                     <tr>
                                         <th class="col-md-4">Url</th>
@@ -42,12 +40,11 @@ include("header.php") ?>
                                         <th class="col-md-1">Duracion</th>
                                         <th >Estado</th>
                                         <th class="col-md-2">Acciciones</th>
-                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $query = "SELECT v.idVideo, v.url,c.idCategory ,c.nameCategory ,v.nameVideo , v.minutesVideo,v.secondsVideo,v.date,v.status FROM videos v INNER JOIN category c ON c.idCategory = v.idCategory";
+                                    $query = "SELECT v.idVideo, v.url,c.idCategory ,c.nameCategory ,v.nameVideo , v.minutesVideo,v.secondsVideo,v.date,v.status FROM videos v INNER JOIN category c ON c.idCategory = v.idCategory ORDER BY date DESC";
                                     $result_videos = mysqli_query($conn,$query);
                                     while ($row = mysqli_fetch_array($result_videos)){ ?>
                                             <tr>
