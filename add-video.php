@@ -24,9 +24,7 @@ include("header.php") ?>
                                         <label for="video-name">Nombre del archivo de video de salida</label>
                                         <input type="text" name="video-name" class="form-control" id="video-name" placeholder="">
                                     </div>
-                                    <div class="form-group">
-                                        <input type="hidden" name="status" value="1" class="form-control" id="status" placeholder="">
-                                    </div>
+                                   
                                   
                                   <div class="form-group">
                                   <label for="video-categoria">Categoria</label>
