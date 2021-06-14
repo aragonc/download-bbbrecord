@@ -27,7 +27,7 @@ include("header.php") ?>
                                     </div>
                                  </div>
 
-                       <div class="col-md-12">
+                       <div class="col-md-14">
                        <div class="list ">LISTA DE REUNIONES</div>
                             <table class="table table-bordered">
                                 <thead>
@@ -35,18 +35,19 @@ include("header.php") ?>
                                     
                                     <br>
                                     <tr>
-                                        <th>Url</th>
+                                        <th class="col-md-4">Url</th>
                                         <th>Categoria</th>
                                         <th>Nombre</th>
-                                        <th>Fecha</th>
-                                        <th>Duracion</th>
-                                        <th>Acciciones</th>
+                                        <th class="col-md-2">Fecha</th>
+                                        <th class="col-md-1">Duracion</th>
+                                        <th >Estado</th>
+                                        <th class="col-md-2">Acciciones</th>
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $query = "SELECT v.idVideo, v.url,c.idCategory ,c.nameCategory ,v.nameVideo , v.minutesVideo,v.secondsVideo,v.date FROM videos v INNER JOIN category c ON c.idCategory = v.idCategory";
+                                    $query = "SELECT v.idVideo, v.url,c.idCategory ,c.nameCategory ,v.nameVideo , v.minutesVideo,v.secondsVideo,v.date,v.status FROM videos v INNER JOIN category c ON c.idCategory = v.idCategory";
                                     $result_videos = mysqli_query($conn,$query);
                                     while ($row = mysqli_fetch_array($result_videos)){ ?>
                                             <tr>
@@ -55,7 +56,11 @@ include("header.php") ?>
                                             <td><?=$row['nameVideo']?></td>
                                             <td><?=$row['date']?></td>
                                             <td><?=$row['minutesVideo'].".".$row['secondsVideo']?></td>
-                                            
+                                           <?php if ($row['status'] == 1){ ?>
+                                            <td style="text-align: center;"><i style="font-size:20px; color:red; padding-top: 13px;" class="fas fa-circle"></i></td>
+                                            <?php }else{ ?>
+                                            <td style="text-align: center;"><i style="font-size:20px; color: green; text-align:center;padding-top: 13px;" class="fas fa-circle"></i></td>
+                                            <?php } ?>
                                             <td>
                                                 <a href="edit-video.php?idVideo=<?php echo $row['idVideo']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
                                                 <a href="delete-video.php?idVideo=<?php echo $row['idVideo']?>" onclick="return confirmDelete()"class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

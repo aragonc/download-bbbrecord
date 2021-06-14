@@ -7,8 +7,9 @@ if(isset($_POST['generate-video'])){
     $videomin = $_POST['video-min'];
     $videoseg = $_POST['video-seg'];
     $dateVideo= $_POST['video-date'];
+    $status = $_POST['status'];
 
-    $query = "INSERT INTO videos(url,idCategory,nameVideo,minutesVideo,secondsVideo,date) VALUES ('$url','$category','$nameVideo','$videomin','$videoseg','$dateVideo')";
+    $query = "INSERT INTO videos(url,idCategory,nameVideo,minutesVideo,secondsVideo,date,status) VALUES ('$url','$category','$nameVideo','$videomin','$videoseg','$dateVideo','$status')";
     $result = mysqli_query($conn,$query);
     if(!$result){
         die("query failed");

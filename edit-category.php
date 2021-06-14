@@ -23,9 +23,9 @@ if (isset($_POST['updateCategory'])) {
   $idCategory = $_GET['idCategory'];
   $nameCategory= $_POST['name-category'];
  
-
   $query = "UPDATE category set nameCategory = '$nameCategory' WHERE idCategory=$idCategory";
   mysqli_query($conn, $query);
+  
   $_SESSION['message'] = 'Archivo Modificado con Exito';
   $_SESSION['message_type'] = 'warning';
   header('Location: index-category.php');
