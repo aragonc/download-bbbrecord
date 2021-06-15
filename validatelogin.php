@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include("db.php");
+
 if($_POST){
 $usuario = $_POST['usuario'];
 $password = $_POST['password'];
@@ -8,8 +9,9 @@ $password = $_POST['password'];
 $_SESSION['usuario'] = $usuario;
 
 $sql = "SELECT * FROM user WHERE user = '$usuario' AND password ='$password'";
-$result = mysqli_query($conn,$sql);
 
+$result = mysqli_query($conn,$sql);
+var_dump($result);
 if (mysqli_num_rows($result) == 1) {
   $usuario= mysqli_fetch_assoc($result);
  

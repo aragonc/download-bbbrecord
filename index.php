@@ -69,7 +69,7 @@ include("header.php") ?>
                     </div>
                 </form>
                 <div class="col-md-12" style="text-align: right;">
-                <button class="btn btn-orange " type="submit" name="generate-category">PROCESAR COLA DE GRABACIONES</button>                         
+                <a href="process.php" class="btn btn-orange " type="submit" name="generate-category">PROCESAR COLA DE GRABACIONES</a>                         
                 </div>
 
             </div>
