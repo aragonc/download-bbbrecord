@@ -14,7 +14,7 @@ include("header.php")
             <div class="col-md-3"></div >
             <div class="col-md-9">
             <div style="margin-bottom: 15px;">
-                <a class="btn btn-lila" href="s"> << Regresar a Videos</a>
+                <a class="btn btn-lila" href="index.php"> << Regresar a Videos</a>
             </div>
             </div>
             <div class="col-md-3"></div >
@@ -31,16 +31,16 @@ include("header.php")
                     </thead>
                     <tbody>
                     <?php 
-                        $query = "SELECT * FROM videos ";
+                        $query = "SELECT * FROM video ";
                          $result_cat = mysqli_query($conn,$query);
                                     while ($row = mysqli_fetch_array($result_cat)){ ?>
                         <tr>
-                            <td><?=$row['idVideo']?></td>
-                            <td><?=$row['nameVideo']?></td>
+                            <td><?=$row['id']?></td>
+                            <td><?=$row['name']?></td>
                             <td>
-                               <a href="edit-category.php?idCategory=<?php echo $row['idCategory']?>" class="btn btn-green">Ver</a>          
-                               <a href="delete-category.php?idCategory=<?php echo $row['idCategory']?>" class="btn btn-secondary"><i class="fas fa-download"></i>Descargar</a>
-                               <a href="delete-category.php?idCategory=<?php echo $row['idCategory']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Eliminar</a>
+                               <a href="edit-category.php?id_category=<?php echo $row['id_category']?>" class="btn btn-green">Ver</a>          
+                               <a href="delete-category.php?id_category=<?php echo $row['id_category']?>" class="btn btn-secondary"><i class="fas fa-download"></i>Descargar</a>
+                               <a href="delete-category.php?id_category=<?php echo $row['id_category']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Eliminar</a>
                             </td>
                         </tr>  
                         

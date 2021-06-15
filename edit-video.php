@@ -3,40 +3,40 @@
   header('Location:login.php');
 }
 include("db.php");
-$url = '';
+$meeting = '';
 $nameVideo= '';
 $videomin='';
 $videoseg='';
-$date ='';
+$dateMeeting ='';
 
-if  (isset($_GET['idVideo'])) {
-  $idVideo = $_GET['idVideo'];
-  $query = "SELECT * FROM videos WHERE idVideo=$idVideo";
+if  (isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $query = "SELECT * FROM video WHERE id=$id";
   $result = mysqli_query($conn, $query);
   if (mysqli_num_rows($result) == 1) {
     $row = mysqli_fetch_array($result);
-    $url = $row['url'];
-    $idCategory= $row['idCategory'];
-    $nameVideo = $row['nameVideo'];
-    $videomin = $row['minutesVideo'];
-    $videoseg = $row['secondsVideo'];
-    $date = $row['date'];
+    $meeting = $row['id_meeting'];
+    $idCategory= $row['id_category'];
+    $nameVideo = $row['name'];
+    $videomin = $row['minutes'];
+    $videoseg = $row['seconds'];
+    $dateMeeting = $row['date_meeting'];
   }
 }
 
 if (isset($_POST['action'])) {
-  $idVideo = $_POST['idVideo'];
-  $url= $_POST['url-meeting'];
+  $id = $_POST['id'];
+  $meeting= $_POST['meeting'];
   $idCategory= $_POST['video-category'];
   $nameVideo= $_POST['video-name'];
   $videomin = $_POST['video-min'];
   $videoseg = $_POST['video-seg'];
-  $date = $_POST['video-date'];
+  $dateMeeting = $_POST['video-date'];
 
 
  
 
-  $query = "UPDATE videos set url = '$url', idCategory='$idCategory', nameVideo = '$nameVideo' , minutesVideo = '$videomin', secondsVideo = '$videoseg' ,date = '$date' WHERE idVideo=$idVideo";
+  $query = "UPDATE video set id_meeting = '$meeting', id_category='$idCategory', name = '$nameVideo' , minutes = '$videomin', seconds = '$videoseg' ,date_meeting = '$dateMeeting' WHERE id=$id";
 
  
   mysqli_query($conn, $query);
@@ -61,9 +61,9 @@ if (isset($_POST['action'])) {
                         
              <div class="col-md-6">
             <form action="edit-video.php" method="POST">
-            <input type="hidden" name="idVideo" value="<?php echo $_GET['idVideo']; ?> ">
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?> ">
         <div class="form-group">
-          <input name="url-meeting" type="text" class="form-control" value="<?php echo $url; ?>">
+          <input name="meeting" type="text" class="form-control" value="<?php echo $meeting; ?>">
         </div>
 
 
@@ -74,7 +74,7 @@ if (isset($_POST['action'])) {
                     <?php $query2 =  "SELECT * FROM category";
                      $resultCat = mysqli_query($conn,$query2);
                      while ($cat = mysqli_fetch_array($resultCat)) { ?>
-                    <option value="<?= $cat['idCategory'] ?>"> <?=$cat['nameCategory'] ?></option>
+                    <option value="<?= $cat['id_category'] ?>"> <?=$cat['nameCategory'] ?></option>
                      <?php  } ?>              
                  </select>            
               </div>           
@@ -86,7 +86,7 @@ if (isset($_POST['action'])) {
 
         <div class="form-group">
                <label for="video-date">Fecha</label>
-               <input type="date" name="video-date" class="form-control" value="<?php echo $date; ?>" id="video-date" placeholder="">
+               <input type="date" name="video-date" class="form-control" value="<?php echo $dateMeeting; ?>" id="video-date" placeholder="">
         </div>
                                    
         <div class="form-group">

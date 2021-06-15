@@ -17,8 +17,8 @@ include("header.php") ?>
                   </form>         
                                 <form method="post" action="saveVideos.php">
                                     <div class="form-group">
-                                        <label for="url-meeting">URL del Meeting BBB</label>
-                                        <input type="text" name="url-meeting" class="form-control" id="url-meeting" placeholder="" required>
+                                        <label for="meeting">URL del Meeting BBB</label>
+                                        <input type="text" name="meeting" class="form-control" id="meeting" placeholder="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="video-name">Nombre del archivo de video de salida</label>
@@ -34,7 +34,7 @@ include("header.php") ?>
                                         <?php $query2 =  "SELECT * FROM category";
                                          $resultCategory = mysqli_query($conn,$query2);
                                          while ($category = mysqli_fetch_array($resultCategory)) { ?>
-                                         <option value="<?= $category['idCategory'] ?>"> <?=$category['nameCategory'] ?></option>
+                                         <option value="<?= $category['id_category'] ?>"> <?=$category['nameCategory'] ?></option>
                                           <?php  } ?>
                                 
                                     </select>

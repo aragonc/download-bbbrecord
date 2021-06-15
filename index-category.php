@@ -45,11 +45,11 @@ include("header.php") ?>
                          $result_cat = mysqli_query($conn,$query);
                                     while ($row = mysqli_fetch_array($result_cat)){ ?>
                         <tr>
-                            <td><?=$row['idCategory']?></td>
+                            <td><?=$row['id_category']?></td>
                             <td><?=$row['nameCategory']?></td>
                             <td>
-                               <a href="edit-category.php?idCategory=<?php echo $row['idCategory']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
-                               <a href="delete-category.php?idCategory=<?php echo $row['idCategory']?>" onclick="return confirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                               <a href="edit-category.php?id_category=<?php echo $row['id_category']?>" class="btn btn-secondary"><i class="fas fa-marker"></i></a>          
+                               <a href="delete-category.php?id_category=<?php echo $row['id_category']?>" onclick="return confirmDelete()" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>  
                         

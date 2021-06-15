@@ -3,9 +3,9 @@
 session_start();
 include("db.php");
 
-if(isset($_GET['idCategory'])) {
-  $idCategory = $_GET['idCategory'];
-  $query = "DELETE FROM category WHERE idCategory = $idCategory";
+if(isset($_GET['id_category'])) {
+  $idCategory = $_GET['id_category'];
+  $query = "DELETE FROM category WHERE id_category = $idCategory";
   $result = mysqli_query($conn, $query);
   
   $_SESSION['message'] = 'Archivo Eliminado satisfactoriamente';

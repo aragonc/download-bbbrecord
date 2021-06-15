@@ -1,14 +1,14 @@
 <?php session_start();
 include "db.php";
 if(isset($_POST['generate-video'])){  
-    $url = $_POST['url-meeting'];
+    $meeting = $_POST['meeting'];
     $category = $_POST['video-categoria'];
     $nameVideo = $_POST['video-name'];
     $videomin = $_POST['video-min'];
     $videoseg = $_POST['video-seg'];
-    $dateVideo= $_POST['video-date'];
+    $dateMeeting= $_POST['video-date'];
    
-    $query = "INSERT INTO videos(url,idCategory,nameVideo,minutesVideo,secondsVideo,date,status) VALUES ('$url','$category','$nameVideo','$videomin','$videoseg','$dateVideo',1)";
+    $query = "INSERT INTO video(meeting,id_category,name,minutes,seconds,date_meeting,status) VALUES ('$meeting','$category','$nameVideo','$videomin','$videoseg','$dateMeeting',1)";
     $result = mysqli_query($conn,$query);
     if(!$result){
         die("query failed");
