@@ -2,7 +2,7 @@
 class db {
 
     protected $dbhost = 'localhost';
-    protected $dbuser = 'aragonc';
+    protected $dbuser = 'jian';
     protected $dbpass = 'mysql123';
 	protected $dbname = 'video';
     protected $charset = 'utf8';
@@ -25,7 +25,7 @@ class db {
 		if ($this->connection->connect_error) {
 			$this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
 		}
-		$this->connection->set_charset($this->$charset);
+		$this->connection->set_charset($charset);
 	}
 
     public function query($query) {
