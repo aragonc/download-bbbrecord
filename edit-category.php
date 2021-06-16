@@ -1,31 +1,28 @@
+<?php 
 
-<?php session_start();
+require_once 'main/db.php';
+session_start();
 
  if(!isset($_SESSION['usuario'])){
   header('Location:login.php');
 }
-include("db.php");
+
+$db = new db();
 $meeting = '';
 $nameCategory = '';
 
 if  (isset($_GET['id_category'])) {
   $idCategory = $_GET['id_category'];
-  $query = "SELECT * FROM category WHERE id_category=$idCategory";
-  $result = mysqli_query($conn, $query);
-  if (mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_array($result);
-    $nameCategory = $row['nameCategory'];
-    
+  $result = $db->query("SELECT * FROM category WHERE id_category=?",[$idCategory])->fetchArray();
+  if ($result) {
+    $nameCategory = $result['nameCategory'];
   }
 }
 
 if (isset($_POST['updateCategory'])) {
   $idCategory = $_GET['id_category'];
   $nameCategory= $_POST['name-category'];
- 
-  $query = "UPDATE category set nameCategory = '$nameCategory' WHERE id_category=$idCategory";
-  mysqli_query($conn, $query);
-  
+  $db->query("UPDATE category set nameCategory = ? WHERE id_category = ?",[$nameCategory,$idCategory]);  
   $_SESSION['message'] = 'Archivo Modificado con Exito';
   $_SESSION['message_type'] = 'warning';
   header('Location: index-category.php');
