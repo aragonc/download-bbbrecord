@@ -1,5 +1,6 @@
 <?php
 
+require_once 'main/db.php';
 class videoRecord{
     // colocamos todas las funciones
 
@@ -12,11 +13,10 @@ class videoRecord{
         //traer todos los videos no procesados  status1
         //devuelve un array
         //url-meeting
-        include("db.php");
-        $sql = "SELECT * FROM video where status=1";
-        $result = mysqli_query($conn, $sql);
-       
-        while($row = mysqli_fetch_array($result)){
+        $db = new db();
+        $result = $db->query('SELECT * FROM video where status=?',[1])->fetchAll();
+        
+        foreach($result as $row){
             $list[] = [
             'id' =>$row['id'],
             'id_meeting' =>$row['id_meeting'],
@@ -36,11 +36,10 @@ class videoRecord{
         //traer todos los videos procesados status2
         //devuelve un array
         //url-meeting
-        include("db.php");
-        $sql = "SELECT * FROM video where status=2";
-        $result = mysqli_query($conn, $sql);
+        $db = new db();
+        $result = $db->query('SELECT * FROM video where status=?',[2])->fetchAll();
        
-        while($row = mysqli_fetch_array($result)){
+        foreach($result as $row){
             $list[] = [
             'id' =>$row['id'],
             'id_meeting' =>$row['id_meeting'],
