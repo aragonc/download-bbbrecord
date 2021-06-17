@@ -1,25 +1,22 @@
 <?php 
 session_start();
-include("db.php");
+require_once 'main/db.php';
+$db = new db();
 
 if($_POST){
 $usuario = $_POST['usuario'];
 $password = $_POST['password'];
 
 $_SESSION['usuario'] = $usuario;
+$result = $db->query("SELECT * FROM user WHERE user=? AND password=? ",[$usuario,$password])->fetchAll();
 
-$sql = "SELECT * FROM user WHERE user = '$usuario' AND password ='$password'";
-
-$result = mysqli_query($conn,$sql);
-var_dump($result);
-if (mysqli_num_rows($result) == 1) {
-  $usuario= mysqli_fetch_assoc($result);
- 
+if ($result) {
   header("Location:index.php");
 }else{
   $_SESSION['error-login'] = "Usuario o Password Incorrecto";
   header("Location:login.php");
   die();
   }
+  
 }
 ?> 

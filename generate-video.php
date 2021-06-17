@@ -4,7 +4,8 @@ session_start();
 if(!isset($_SESSION['usuario'])){
     header('Location:login.php');
   }
-include("db.php"); 
+require_once 'main/db.php';
+$db = new db();
 $title = "Generar Video"; 
 include("header.php") 
 ?>         
@@ -31,9 +32,9 @@ include("header.php")
                     </thead>
                     <tbody>
                     <?php 
-                        $query = "SELECT * FROM video ";
-                         $result_cat = mysqli_query($conn,$query);
-                                    while ($row = mysqli_fetch_array($result_cat)){ ?>
+                    
+                    $result = $db->query("SELECT * FROM video")->fetchAll(); 
+                    foreach($result as $row)  {?>
                         <tr>
                             <td><?=$row['id']?></td>
                             <td><?=$row['name']?></td>

@@ -1,8 +1,12 @@
-<?php session_start();
+<?php
+require_once 'main/db.php';
+session_start();
  if(!isset($_SESSION['usuario'])){
   header('Location:login.php');
 }
-include("db.php");
+
+$db = new db();
+
 $meeting = '';
 $nameVideo= '';
 $videomin='';
@@ -11,16 +15,17 @@ $dateMeeting ='';
 
 if  (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "SELECT * FROM video WHERE id=$id";
-  $result = mysqli_query($conn, $query);
-  if (mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_array($result);
-    $meeting = $row['id_meeting'];
-    $idCategory= $row['id_category'];
-    $nameVideo = $row['name'];
-    $videomin = $row['minutes'];
-    $videoseg = $row['seconds'];
-    $dateMeeting = $row['date_meeting'];
+  $result = $db->query("SELECT v.id, v.id_meeting,c.id_category ,c.nameCategory ,v.name , v.minutes,v.seconds,v.date_meeting,v.status FROM video v INNER JOIN category c ON c.id_category = v.id_category ORDER BY date_meeting DESC")->fetchArray();
+  
+  if ($result) {
+    
+    $meeting = $result['id_meeting'];
+    $idCategory= $result['id_category'];
+    $nameCategory = $result['nameCategory'];
+    $nameVideo = $result['name'];
+    $videomin = $result['minutes'];
+    $videoseg = $result['seconds'];
+    $dateMeeting = $result['date_meeting'];
   }
 }
 
@@ -33,13 +38,8 @@ if (isset($_POST['action'])) {
   $videoseg = $_POST['video-seg'];
   $dateMeeting = $_POST['video-date'];
 
+  $db->query("UPDATE video set id_meeting = ?, id_category=?, name = ? , minutes = ? , seconds = ? ,date_meeting = ? WHERE id=?",[$meeting,$idCategory,$nameVideo,$videomin,$videoseg,$dateMeeting,$id]);
 
- 
-
-  $query = "UPDATE video set id_meeting = '$meeting', id_category='$idCategory', name = '$nameVideo' , minutes = '$videomin', seconds = '$videoseg' ,date_meeting = '$dateMeeting' WHERE id=$id";
-
- 
-  mysqli_query($conn, $query);
   $_SESSION['message'] = 'Archivo Modificado con Exito';
   $_SESSION['message_type'] = 'warning';
   header('Location: index.php');
@@ -70,11 +70,12 @@ if (isset($_POST['action'])) {
         <div class="form-group">
                 <label for="video-categoria">Categoria</label>
               <div>
-              <select  class="btn btn-secondary" name="video-category" >                      
-                    <?php $query2 =  "SELECT * FROM category";
-                     $resultCat = mysqli_query($conn,$query2);
-                     while ($cat = mysqli_fetch_array($resultCat)) { ?>
-                    <option value="<?= $cat['id_category'] ?>"> <?=$cat['nameCategory'] ?></option>
+              <select  class="btn btn-secondary" name="video-category" >
+                               
+                    <?php
+                      $result = $db->query("SELECT * FROM category")->fetchAll();  
+                     foreach($result as $row)  { ?>
+                    <option value="<?= $row['id_category'] ?>"><?= $row['nameCategory']; ?></option>
                      <?php  } ?>              
                  </select>            
               </div>           

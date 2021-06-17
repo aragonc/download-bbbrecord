@@ -1,5 +1,6 @@
 <?php session_start();
-include "db.php";
+require_once 'main/db.php';
+$db = new db();
 if(isset($_POST['generate-video'])){  
     $meeting = $_POST['meeting'];
     $category = $_POST['video-categoria'];
@@ -8,8 +9,8 @@ if(isset($_POST['generate-video'])){
     $videoseg = $_POST['video-seg'];
     $dateMeeting= $_POST['video-date'];
    
-    $query = "INSERT INTO video(id_meeting,id_category,name,minutes,seconds,date_meeting,status) VALUES ('$meeting','$category','$nameVideo','$videomin','$videoseg','$dateMeeting',1)";
-    $result = mysqli_query($conn,$query);
+    $result =$db->query("INSERT INTO video(id_meeting,id_category,name,minutes,seconds,date_meeting,status) VALUES (?,?,?,?,?,?,?)",[$meeting],[$category],[$nameVideo],[$videomin],[$videoseg],[$dateMeeting],[1]) ;
+    
     if(!$result){
         die("query failed");
     }

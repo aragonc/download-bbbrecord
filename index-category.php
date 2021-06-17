@@ -1,9 +1,11 @@
 <?php 
 session_start();
+require_once 'main/db.php';
 if(!isset($_SESSION['usuario'])){
     header('Location:login.php');
 }
-include("db.php");
+
+$db = new db();
 $title = "Categoria";
 include("header.php") ?>
         <div class="col-md-3"></div >
@@ -41,9 +43,9 @@ include("header.php") ?>
                     </thead>
                     <tbody>
                     <?php 
-                        $query = "SELECT * FROM category";
-                         $result_cat = mysqli_query($conn,$query);
-                                    while ($row = mysqli_fetch_array($result_cat)){ ?>
+                        $result = $db->query("SELECT * FROM category")->fetchAll();  
+                        foreach($result as $row)  { ?>
+                                    
                         <tr>
                             <td><?=$row['id_category']?></td>
                             <td><?=$row['nameCategory']?></td>

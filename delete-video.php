@@ -1,12 +1,13 @@
 
 <?php
 session_start();
-include("db.php");
+require_once 'main/db.php';
+$db = new db();
 
 if(isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "DELETE FROM video WHERE id = $id";
-  $result = mysqli_query($conn, $query);
+  $result = $db->query("DELETE FROM video WHERE id = ?",[$id]);
+  
   if(!$result) {
     die("Query Failed.");
   }

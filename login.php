@@ -1,5 +1,8 @@
-<?php session_start(); 
- include("db.php") ?>
+<?php 
+session_start(); 
+require_once 'main/db.php';
+$db = new db();
+  ?>
 <!doctype html>
 <html lang="es">
 <head>

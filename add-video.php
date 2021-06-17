@@ -1,10 +1,12 @@
 <?php 
 session_start();
+require_once 'main/db.php';
+$db = new db();
 if(!isset($_SESSION['usuario'])){
     header('Location:login.php');
   }
 $title = "Generar un BBB Record!"; 
-include("db.php");
+
 include("header.php") ?>
         <div class="col-md-3"></div >
                     <div class="col-md-6">
@@ -31,11 +33,11 @@ include("header.php") ?>
                                    <div>
                                    <select style="width:100%; border:1px solid black;"  class="btn btn-default" name="video-categoria" required >
                                         
-                                        <?php $query2 =  "SELECT * FROM category";
-                                         $resultCategory = mysqli_query($conn,$query2);
-                                         while ($category = mysqli_fetch_array($resultCategory)) { ?>
-                                         <option value="<?= $category['id_category'] ?>"> <?=$category['nameCategory'] ?></option>
-                                          <?php  } ?>
+                                   <?php
+                                    $result = $db->query("SELECT * FROM category")->fetchAll();  
+                                  foreach($result as $row)  { ?>
+                                  <option value="<?= $row['id_category'] ?>"><?=$row['nameCategory']; ?></option>
+                                  <?php  } ?>  
                                 
                                     </select>
                                    </div>

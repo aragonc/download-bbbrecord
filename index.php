@@ -1,9 +1,11 @@
 <?php 
 session_start();
+require_once 'main/db.php';
+$db = new db();
  if(!isset($_SESSION['usuario'])){
    header('Location:login.php');
  }
-include("db.php");
+
 $title = "Inicio";                  
 include("header.php") ?>        
 <div class="col-md-12" style="padding-top: 15px;">
@@ -44,9 +46,8 @@ include("header.php") ?>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                    $query = "SELECT v.id, v.id_meeting,c.id_category ,c.nameCategory ,v.name , v.minutes,v.seconds,v.date_meeting,v.status FROM video v INNER JOIN category c ON c.id_category = v.id_category ORDER BY date_meeting DESC";
-                                    $result_videos = mysqli_query($conn,$query);
-                                    while ($row = mysqli_fetch_array($result_videos)){ ?>
+                                    $result_videos=$db->query("SELECT v.id, v.id_meeting,c.id_category ,c.nameCategory ,v.name , v.minutes,v.seconds,v.date_meeting,v.status FROM video v INNER JOIN category c ON c.id_category = v.id_category ORDER BY date_meeting DESC")->fetchAll();     
+                                    foreach ($result_videos as $row){ ?>
                                             <tr">
                                             <td><a href="<?=$row['id_meeting']?>"><?=$row['id_meeting']?></a></td>
                                             <td><?=$row['nameCategory']?></td>

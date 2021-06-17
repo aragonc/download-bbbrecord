@@ -1,12 +1,13 @@
 
 <?php
 session_start();
-include("db.php");
+require_once 'main/db.php';
+$db = new db();
 
 if(isset($_GET['id_category'])) {
   $idCategory = $_GET['id_category'];
-  $query = "DELETE FROM category WHERE id_category = $idCategory";
-  $result = mysqli_query($conn, $query);
+  $result = $db->query("DELETE FROM category WHERE id_category = ?",[$idCategory]);
+ 
   
   $_SESSION['message'] = 'Archivo Eliminado satisfactoriamente';
   $_SESSION['message_type'] = 'danger';
